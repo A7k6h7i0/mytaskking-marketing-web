@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0a0f1c;
+  --ink-soft: #1a2236;
+  --accent: #ff4d2e;
+  --accent-deep: #e63d20;
+  --accent-soft: #ffe6e0;
+  --sky: #eef2f8;
+  --mist: #f5f7fb;
+  --paper: #ffffff;
+  --line: rgba(10, 15, 28, 0.08);
+  --muted: #5c6578;
+  --background: var(--mist);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-soft: var(--accent-soft);
+  --color-sky: var(--sky);
+  --color-mist: var(--mist);
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 28%, white);
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-body), system-ui, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.site-atmosphere {
+  background:
+    radial-gradient(900px 520px at 8% -5%, rgba(255, 77, 46, 0.14), transparent 55%),
+    radial-gradient(800px 480px at 92% 0%, rgba(37, 99, 235, 0.1), transparent 50%),
+    radial-gradient(700px 400px at 50% 100%, rgba(14, 165, 233, 0.06), transparent 55%),
+    linear-gradient(180deg, #f8fafc 0%, var(--mist) 45%, #eef2f8 100%);
+}
+
+.mesh-glow {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 77, 46, 0.22), transparent 42%),
+    radial-gradient(circle at 78% 30%, rgba(59, 130, 246, 0.18), transparent 40%),
+    radial-gradient(circle at 55% 80%, rgba(14, 165, 233, 0.12), transparent 45%);
+  filter: blur(40px);
+}
+
+.section-pad {
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-pad {
+    padding-inline: 3rem;
+  }
+}
+
+.container-site {
+  width: 100%;
+  max-width: 74rem;
+  margin-inline: auto;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.875rem;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.8rem 1.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 10px 30px -16px rgba(10, 15, 28, 0.55);
+}
+
+.btn-primary:hover {
+  background: var(--ink-soft);
+  transform: translateY(-1px);
+}
+
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.875rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.8rem 1.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-accent:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.875rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--ink);
+  padding: 0.8rem 1.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: color-mix(in oklab, var(--accent) 45%, transparent);
+  background: white;
+  transform: translateY(-1px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.25rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--accent);
+}
