@@ -27,18 +27,28 @@ export function Footer() {
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">Explore</p>
             <ul className="mt-4 space-y-2.5 text-sm text-white/75">
               <li>
+                <Link href="/" className="transition hover:text-white">
+                  Home
+                </Link>
+              </li>
+              <li>
                 <Link href="/features" className="transition hover:text-white">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="/#platforms" className="transition hover:text-white">
+                <Link href="/platforms" className="transition hover:text-white">
                   Platforms
                 </Link>
               </li>
               <li>
-                <Link href="/#roles" className="transition hover:text-white">
+                <Link href="/roles" className="transition hover:text-white">
                   Roles
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="transition hover:text-white">
+                  Contact
                 </Link>
               </li>
             </ul>
@@ -49,7 +59,7 @@ export function Footer() {
             <p className="mt-4 text-sm leading-relaxed text-white/70">
               Ready to replace scattered chats and missed follow-ups?
             </p>
-            <Link href="/#contact" className="btn-accent mt-5">
+            <Link href="/contact" className="btn-accent mt-5">
               Talk to sales
             </Link>
           </div>

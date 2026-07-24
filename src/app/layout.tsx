@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en" className={`${jakarta.variable} ${spaceGrotesk.variable} h-full`}>
       <body className="flex min-h-full w-full flex-col overflow-x-hidden antialiased">
         <Header />
-        <main className="w-full flex-1">{children}</main>
+        <main className="w-full flex-1 pt-[var(--header-height)]">{children}</main>
         <Footer />
       </body>
     </html>

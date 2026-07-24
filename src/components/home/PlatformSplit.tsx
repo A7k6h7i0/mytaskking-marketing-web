@@ -1,21 +1,32 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 export function PlatformSplit() {
   return (
-    <section id="platforms" className="w-full scroll-mt-24 bg-sky/50 py-16 sm:py-20 md:py-28">
+    <section id="platforms" className="w-full scroll-mt-[calc(var(--header-height)+1rem)] bg-sky/50 py-14 sm:py-20 md:py-28">
       <div className="section-pad">
         <div className="container-site">
-          <p className="eyebrow">Platforms</p>
-          <h2 className="mt-4 max-w-2xl font-display text-2xl font-bold text-ink sm:text-4xl md:text-5xl md:leading-[1.05]">
-            Android for the field. Windows for the desk.
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:mt-5 sm:text-base md:text-lg">
-            Each platform is intentional — calling and meetings on mobile, accountability and deep
-            work on desktop.
-          </p>
+          <div className="flex flex-col gap-4 sm:gap-5 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="eyebrow">Platforms</p>
+              <h2 className="mt-4 max-w-2xl font-display text-2xl font-bold text-ink sm:text-4xl md:text-5xl md:leading-[1.05]">
+                Android for the field. Windows for the desk.
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:mt-5 sm:text-base md:text-lg">
+                Each platform is intentional — calling and meetings on mobile, accountability and
+                deep work on desktop.
+              </p>
+            </div>
+            <Link
+              href="/platforms"
+              className="shrink-0 text-sm font-bold text-accent-deep transition hover:text-ink"
+            >
+              See all platforms →
+            </Link>
+          </div>
 
           <div className="mt-10 grid items-stretch gap-4 sm:mt-14 sm:gap-6 lg:grid-cols-2">
             <motion.div

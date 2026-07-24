@@ -11,7 +11,7 @@ type BrandLogoProps = {
 };
 
 const sizeClass = {
-  nav: "h-10 w-auto max-h-10 object-contain sm:h-11 sm:max-h-11",
+  nav: "h-9 w-auto max-h-9 object-contain sm:h-10 sm:max-h-10 md:h-11 md:max-h-11",
   md: "h-9 w-auto object-contain sm:h-10",
   lg: "h-12 w-auto object-contain sm:h-14",
 } as const;

@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export function FinalCta() {
   return (
-    <section id="contact" className="w-full scroll-mt-24">
-      <div className="brand-gradient-bg relative w-full overflow-hidden py-14 text-white sm:py-20 md:py-24">
+    <section id="contact" className="w-full scroll-mt-[calc(var(--header-height)+1rem)]">
+      <div className="brand-gradient-bg relative w-full overflow-hidden py-12 text-white sm:py-20 md:py-24">
         <div
           className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 rounded-full bg-white/20 blur-3xl"
           aria-hidden
@@ -27,12 +27,12 @@ export function FinalCta() {
             </div>
 
             <div className="btn-row-mobile flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <a
-                href="mailto:hello@mytaskking.com"
+              <Link
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-bold text-white transition hover:bg-ink-soft"
               >
                 Talk to sales
-              </a>
+              </Link>
               <Link
                 href="/features"
                 className="inline-flex items-center justify-center rounded-xl border border-white/45 bg-white/15 px-5 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/25"

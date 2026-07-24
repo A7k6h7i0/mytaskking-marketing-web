@@ -67,7 +67,7 @@ export function FeatureJourneyGrid() {
         <article
           key={journey.id}
           id={journey.id}
-          className="scroll-mt-28 grid gap-5 sm:gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12"
+          className="scroll-mt-[calc(var(--header-height)+1rem)] grid gap-5 sm:gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12"
         >
           <div>
             <p className="eyebrow">Journey {String(index + 1).padStart(2, "0")}</p>
@@ -124,7 +124,7 @@ export function FeatureJourneyGrid() {
       <div className="rounded-2xl border border-line bg-sky/60 px-4 py-4 sm:px-5 sm:py-5">
         <p className="text-sm text-muted">
           Want a walkthrough for your team?{" "}
-          <Link href="/#contact" className="font-bold text-accent-deep hover:text-ink">
+          <Link href="/contact" className="font-bold text-accent-deep hover:text-ink">
             Request a demo
           </Link>
           .

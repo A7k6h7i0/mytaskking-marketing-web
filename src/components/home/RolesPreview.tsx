@@ -3,7 +3,7 @@ import { roles } from "@/data/roles";
 
 export function RolesPreview() {
   return (
-    <section id="roles" className="w-full scroll-mt-24 py-16 sm:py-20 md:py-28">
+    <section id="roles" className="w-full scroll-mt-[calc(var(--header-height)+1rem)] py-14 sm:py-20 md:py-28">
       <div className="section-pad">
         <div className="container-site">
           <div className="flex flex-col gap-4 sm:gap-5 md:flex-row md:items-end md:justify-between">
@@ -14,10 +14,10 @@ export function RolesPreview() {
               </h2>
             </div>
             <Link
-              href="/features"
+              href="/roles"
               className="shrink-0 text-sm font-bold text-accent-deep transition hover:text-ink"
             >
-              See all features →
+              See all roles →
             </Link>
           </div>
 
