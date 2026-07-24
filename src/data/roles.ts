@@ -13,31 +13,26 @@ export const roles: Role[] = [
   {
     id: "manager",
     name: "Manager",
-    blurb: "Everything employees get — plus clients and team oversight.",
+    blurb: "Everything employees get — plus clients and team management.",
   },
   {
     id: "telecaller",
     name: "Telecaller",
-    blurb: "Leads, outbound calls, outcomes, and recordings.",
+    blurb: "Chat, leads, calls, and dashboard.",
   },
   {
     id: "client",
     name: "Client",
-    blurb: "Assigned channels, files, dashboard, and settings.",
+    blurb: "Chat, settings, and dashboard.",
   },
   {
     id: "org-admin",
     name: "Org Admin",
-    blurb: "Full workspace, recordings, AI review, activity, and billing.",
-  },
-  {
-    id: "sales-head",
-    name: "Sales Head",
-    blurb: "Onboard companies, review KYC, approve or reject — no chat.",
+    blurb: "Full workspace plus recordings, AI review, activity, and settings.",
   },
   {
     id: "super-admin",
     name: "Platform Super Admin",
-    blurb: "All organisations, plans, create and delete companies.",
+    blurb: "Everything above — plus all organisations across the platform.",
   },
 ];

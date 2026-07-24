@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { site } from "@/data/site";
 
 const links = [
@@ -18,13 +19,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-line/80 bg-paper/90 backdrop-blur-xl">
       <div className="section-pad">
         <div className="container-site flex h-16 items-center justify-between gap-3">
-          <Link
-            href="/"
-            className="shrink-0 font-display text-base font-bold text-ink sm:text-[1.05rem]"
-          >
-            {site.name}
-            <span className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle" />
-          </Link>
+          <BrandLogo priority />
 
           <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
             {links.map((link) => (

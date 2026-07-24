@@ -99,7 +99,7 @@ function DeviceShell({
       </div>
       {showCaption ? (
         <p className="mt-3 text-center text-xs font-medium text-muted">
-          Preview UI — real screenshots come in Phase 2
+          MyTaskKing on Android
         </p>
       ) : null}
     </div>

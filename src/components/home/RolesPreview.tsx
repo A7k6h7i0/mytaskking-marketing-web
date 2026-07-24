@@ -15,9 +15,9 @@ export function RolesPreview() {
             </div>
             <Link
               href="/features"
-              className="shrink-0 text-sm font-bold text-accent transition hover:text-accent-deep"
+              className="shrink-0 text-sm font-bold text-accent-deep transition hover:text-ink"
             >
-              See features by journey →
+              See all features →
             </Link>
           </div>
 
@@ -25,9 +25,9 @@ export function RolesPreview() {
             {roles.map((role) => (
               <div
                 key={role.id}
-                className="group rounded-2xl border border-line bg-paper p-4 transition duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-[0_20px_50px_-30px_rgba(10,15,28,0.35)] sm:p-5"
+                className="group rounded-2xl border border-line bg-paper p-4 transition duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-[0_20px_50px_-30px_rgba(10,31,68,0.35)] sm:p-5"
               >
-                <div className="mb-3 h-1 w-8 rounded-full bg-accent/80 transition group-hover:w-12 sm:mb-4" />
+                <div className="mb-3 h-1 w-8 rounded-full brand-gradient-bg transition group-hover:w-12 sm:mb-4" />
                 <h3 className="font-display text-base font-bold text-ink sm:text-lg">{role.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{role.blurb}</p>
               </div>

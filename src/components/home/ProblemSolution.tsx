@@ -11,7 +11,7 @@ const before = [
 const after = [
   "One private company workspace per organisation",
   "Leads, outcomes, and recordings in one pipeline",
-  "Check-in, Work Activity, and login history for leaders",
+  "Check-in, Work Activity, and clear visibility for leaders",
 ];
 
 export function ProblemSolution() {
@@ -23,9 +23,13 @@ export function ProblemSolution() {
           <h2 className="mt-4 max-w-2xl font-display text-2xl font-bold text-ink sm:text-4xl md:text-5xl md:leading-[1.05]">
             Replace guesswork with one clear company system.
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:mt-5 sm:text-base md:text-lg">
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted sm:mt-5 sm:text-base md:text-lg">
             MyTaskKing replaces scattered WhatsApp groups, missed follow-ups, and invisible remote
-            work — so leaders run the business with clarity.
+            work with one company workspace. Teams chat, call, meet, and manage tasks in one place;
+            telecallers log every lead and recording; managers see who checked in, who is working,
+            and who answered calls. Admins get recordings, AI insights, and activity history. Each
+            organisation stays private. Android handles field work and calling; Windows keeps
+            desktop staff accountable — so leaders run the business with clarity, not guesswork.
           </p>
 
           <div className="mt-10 grid gap-4 sm:mt-14 sm:gap-5 lg:grid-cols-2">
@@ -54,11 +58,11 @@ export function ProblemSolution() {
               transition={{ duration: 0.45, delay: 0.08 }}
               className="rounded-2xl bg-ink p-5 text-paper sm:rounded-3xl sm:p-7 md:p-8"
             >
-              <p className="text-sm font-bold text-accent">With MyTaskKing</p>
+              <p className="text-sm font-bold text-lime">With MyTaskKing</p>
               <ul className="mt-5 space-y-3 sm:mt-6 sm:space-y-4">
                 {after.map((item) => (
                   <li key={item} className="flex gap-3 text-sm text-white/85 sm:text-base">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lime" />
                     <span>{item}</span>
                   </li>
                 ))}

@@ -1,18 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0a0f1c;
-  --ink-soft: #1a2236;
-  --accent: #ff4d2e;
-  --accent-deep: #e63d20;
-  --accent-soft: #ffe6e0;
-  --sky: #eef2f8;
-  --mist: #f5f7fb;
+  --ink: #0a1f44;
+  --ink-soft: #14356a;
+  --accent: #00a9c8;
+  --accent-deep: #0089a6;
+  --lime: #8fd400;
+  --blue: #1f5eff;
+  --accent-soft: #e6f8fc;
+  --sky: #eef4fb;
+  --mist: #f5f8fc;
   --paper: #ffffff;
-  --line: rgba(10, 15, 28, 0.08);
-  --muted: #5c6578;
+  --line: rgba(10, 31, 68, 0.1);
+  --muted: #5a6b86;
   --background: var(--mist);
   --foreground: var(--ink);
+  --brand-gradient: linear-gradient(115deg, #1f5eff 0%, #00a9c8 52%, #8fd400 100%);
   --header-height: 4rem;
 }
 
@@ -22,6 +25,8 @@
   --color-accent: var(--accent);
   --color-accent-deep: var(--accent-deep);
   --color-accent-soft: var(--accent-soft);
+  --color-lime: var(--lime);
+  --color-blue: var(--blue);
   --color-sky: var(--sky);
   --color-mist: var(--mist);
   --color-paper: var(--paper);
@@ -75,21 +80,31 @@ svg {
 .site-atmosphere {
   width: 100%;
   background:
-    radial-gradient(900px 520px at 8% -5%, rgba(255, 77, 46, 0.14), transparent 55%),
-    radial-gradient(800px 480px at 92% 0%, rgba(37, 99, 235, 0.1), transparent 50%),
-    radial-gradient(700px 400px at 50% 100%, rgba(14, 165, 233, 0.06), transparent 55%),
-    linear-gradient(180deg, #f8fafc 0%, var(--mist) 45%, #eef2f8 100%);
+    radial-gradient(900px 520px at 8% -5%, rgba(31, 94, 255, 0.14), transparent 55%),
+    radial-gradient(800px 480px at 92% 0%, rgba(0, 169, 200, 0.14), transparent 50%),
+    radial-gradient(700px 400px at 50% 100%, rgba(143, 212, 0, 0.08), transparent 55%),
+    linear-gradient(180deg, #f7faff 0%, var(--mist) 45%, #eef4fb 100%);
 }
 
 .mesh-glow {
   background:
-    radial-gradient(circle at 30% 20%, rgba(255, 77, 46, 0.22), transparent 42%),
-    radial-gradient(circle at 78% 30%, rgba(59, 130, 246, 0.18), transparent 40%),
-    radial-gradient(circle at 55% 80%, rgba(14, 165, 233, 0.12), transparent 45%);
+    radial-gradient(circle at 30% 20%, rgba(31, 94, 255, 0.22), transparent 42%),
+    radial-gradient(circle at 78% 30%, rgba(0, 169, 200, 0.2), transparent 40%),
+    radial-gradient(circle at 55% 80%, rgba(143, 212, 0, 0.14), transparent 45%);
   filter: blur(40px);
 }
 
-/* Edge-to-edge sections; content inset only */
+.brand-gradient-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand-gradient-bg {
+  background: var(--brand-gradient);
+}
+
 .section-pad {
   width: 100%;
   padding-inline: clamp(1rem, 4vw, 3.5rem);
@@ -121,7 +136,7 @@ svg {
 .btn-primary {
   background: var(--ink);
   color: var(--paper);
-  box-shadow: 0 10px 30px -16px rgba(10, 15, 28, 0.55);
+  box-shadow: 0 10px 30px -16px rgba(10, 31, 68, 0.55);
 }
 
 .btn-primary:hover {
@@ -130,18 +145,19 @@ svg {
 }
 
 .btn-accent {
-  background: var(--accent);
+  background: var(--brand-gradient);
   color: white;
+  box-shadow: 0 12px 28px -14px rgba(0, 169, 200, 0.65);
 }
 
 .btn-accent:hover {
-  background: var(--accent-deep);
+  filter: brightness(1.05);
   transform: translateY(-1px);
 }
 
 .btn-ghost {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   color: var(--ink);
   backdrop-filter: blur(8px);
 }
@@ -160,7 +176,7 @@ svg {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-deep);
 }
 
 .eyebrow::before {
@@ -168,7 +184,7 @@ svg {
   width: 1.25rem;
   height: 2px;
   border-radius: 999px;
-  background: var(--accent);
+  background: var(--brand-gradient);
 }
 
 @media (max-width: 639px) {

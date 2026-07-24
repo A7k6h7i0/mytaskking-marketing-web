@@ -1,25 +1,25 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { site } from "@/data/site";
 
 export function Footer() {
   return (
     <footer className="relative w-full overflow-hidden bg-ink text-paper">
       <div
-        className="pointer-events-none absolute -left-20 top-0 h-64 w-64 rounded-full bg-accent/20 blur-3xl"
+        className="pointer-events-none absolute -left-20 top-0 h-64 w-64 rounded-full bg-accent/25 blur-3xl"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-16 bottom-0 h-56 w-56 rounded-full bg-[#3b82f6]/25 blur-3xl"
+        className="pointer-events-none absolute -right-16 bottom-0 h-56 w-56 rounded-full bg-lime/20 blur-3xl"
         aria-hidden
       />
 
       <div className="section-pad relative">
         <div className="container-site grid gap-10 py-12 sm:gap-12 sm:py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr]">
           <div>
-            <p className="font-display text-xl font-bold tracking-tight sm:text-2xl">
-              {site.name}
-              <span className="ml-1.5 inline-block h-2 w-2 rounded-full bg-accent align-middle" />
-            </p>
+            <div className="inline-flex rounded-xl bg-paper px-3 py-2">
+              <BrandLogo href="/" size="md" />
+            </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">{site.description}</p>
           </div>
 

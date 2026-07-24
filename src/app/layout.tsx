@@ -19,7 +19,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — Enterprise company workspace`,
+    default: `${site.name} — Company workspace for teams`,
     template: `%s · ${site.name}`,
   },
   description: site.description,

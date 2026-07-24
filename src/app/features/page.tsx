@@ -6,7 +6,7 @@ import { featureJourneys } from "@/data/features";
 export const metadata: Metadata = {
   title: "Features",
   description:
-    "Explore MyTaskKing feature journeys — communication, workday, tasks, telecaller CRM, desktop accountability, admin tools, and organisation onboarding.",
+    "Explore every MyTaskKing feature — communication, calls, tasks, workday, telecaller CRM, Windows desktop, admin tools, and more.",
 };
 
 export default function FeaturesPage() {
@@ -20,22 +20,19 @@ export default function FeaturesPage() {
           <div className="container-site py-10 sm:py-14 md:py-20">
             <p className="eyebrow">Features</p>
             <h1 className="mt-4 max-w-3xl font-display text-3xl font-bold text-ink sm:text-5xl md:text-6xl md:leading-[1.02]">
-              Every capability, grouped the way buyers think.
+              Every capability your team needs — clearly laid out.
             </h1>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:mt-5 sm:text-base md:text-lg">
-              Jump into a journey below. Each block is ready for real screenshots and short videos —
-              so non-technical viewers understand the product without opening the app.
+              Explore how MyTaskKing helps teams chat, call, manage work, track the workday, run
+              telecalling, and administer the company — without opening the app first.
             </p>
 
-            <nav
-              className="mt-8 flex flex-wrap gap-2 sm:mt-10"
-              aria-label="Feature journeys"
-            >
+            <nav className="mt-8 flex flex-wrap gap-2 sm:mt-10" aria-label="Feature journeys">
               {featureJourneys.map((journey) => (
                 <a
                   key={journey.id}
                   href={`#${journey.id}`}
-                  className="rounded-xl border border-line bg-paper/80 px-3 py-2 text-xs font-semibold text-ink-soft transition hover:border-accent/40 hover:text-accent sm:px-3.5 sm:text-sm"
+                  className="rounded-xl border border-line bg-paper/80 px-3 py-2 text-xs font-semibold text-ink-soft transition hover:border-accent/40 hover:text-accent-deep sm:px-3.5 sm:text-sm"
                 >
                   {journey.title}
                 </a>
