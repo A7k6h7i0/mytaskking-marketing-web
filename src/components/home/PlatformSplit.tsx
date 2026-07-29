@@ -27,29 +27,30 @@ export function PlatformSplit() {
             </div>
 
             {/* Right Circular Portrait Showcase */}
-            <div className="relative flex items-center justify-center py-6">
-              <div className="relative flex items-center gap-6 sm:gap-12">
+            <div className="relative flex items-center justify-center overflow-visible py-6">
+              <div className="relative flex items-center gap-3 xs:gap-6 sm:gap-12">
                 {/* Field Worker Circle */}
-                <div className="relative">
-                  <div className="relative h-40 w-40 overflow-hidden rounded-full border-4 border-white shadow-lg sm:h-48 sm:w-48">
+                <div className="relative shrink-0">
+                  <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-lg xs:h-32 xs:w-32 sm:h-48 sm:w-48">
                     <Image
                       src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80"
                       alt="Field worker on mobile"
                       fill
+                      sizes="(max-width: 640px) 128px, 192px"
                       className="object-cover"
                     />
                   </div>
                   {/* Floating Card Left */}
-                  <div className="absolute -left-12 bottom-2 w-44 rounded-xl border border-slate-100 bg-white p-3 shadow-md sm:-left-16">
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-emerald-50 text-emerald-600">
-                        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                  <div className="absolute -left-2 bottom-1 w-32 rounded-lg border border-slate-100 bg-white p-2 shadow-md xs:-left-6 xs:w-36 xs:p-2.5 sm:-left-16 sm:w-44 sm:p-3">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-emerald-600 sm:h-6 sm:w-6">
+                        <svg className="h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M17.523 15.3l-1.804-1.8a7.412 7.412 0 00.828-3.3c0-4.142-3.358-7.5-7.5-7.5s-7.5 3.358-7.5 7.5 3.358 7.5 7.5 7.5c1.238 0 2.4-.3 3.428-.828l1.8 1.804c.414.414 1.086.414 1.5 0l1.8-1.8c.414-.414.414-1.086 0-1.5zM9.047 15.3c-2.9 0-5.25-2.35-5.25-5.25s2.35-5.25 5.25-5.25 5.25 2.35 5.25 5.25-2.35 5.25-5.25 5.25z" />
                         </svg>
                       </div>
-                      <span className="text-xs font-bold text-slate-800">On the move</span>
+                      <span className="text-[10px] font-bold text-slate-800 sm:text-xs">On the move</span>
                     </div>
-                    <p className="mt-1.5 text-[10px] leading-relaxed text-slate-500">
+                    <p className="mt-1 text-[8px] leading-relaxed text-slate-500 sm:mt-1.5 sm:text-[10px]">
                       Stay connected, update and communicate anytime, anywhere.
                     </p>
                   </div>
@@ -57,34 +58,35 @@ export function PlatformSplit() {
 
                 {/* Sync Icon in the middle */}
                 <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-100 bg-white text-blue-600 shadow-md">
-                    <svg className="h-5 w-5 animate-spin-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-100 bg-white text-blue-600 shadow-md sm:h-10 sm:w-10">
+                    <svg className="h-4 w-4 animate-spin-slow sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.228 9H18.01" />
                     </svg>
                   </div>
                 </div>
 
                 {/* Desk Worker Circle */}
-                <div className="relative">
-                  <div className="relative h-40 w-40 overflow-hidden rounded-full border-4 border-white shadow-lg sm:h-48 sm:w-48">
+                <div className="relative shrink-0">
+                  <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-lg xs:h-32 xs:w-32 sm:h-48 sm:w-48">
                     <Image
                       src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80"
                       alt="Office worker on desktop"
                       fill
+                      sizes="(max-width: 640px) 128px, 192px"
                       className="object-cover"
                     />
                   </div>
                   {/* Floating Card Right */}
-                  <div className="absolute -right-12 bottom-2 w-44 rounded-xl border border-slate-100 bg-white p-3 shadow-md sm:-right-16">
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-blue-50 text-blue-600">
-                        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                  <div className="absolute -right-2 bottom-1 w-32 rounded-lg border border-slate-100 bg-white p-2 shadow-md xs:-right-6 xs:w-36 xs:p-2.5 sm:-right-16 sm:w-44 sm:p-3">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-600 sm:h-6 sm:w-6">
+                        <svg className="h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M20 3H4a2 2 0 00-2 2v11a2 2 0 002 2h4l-1 3v1h10v-1l-1-3h4a2 2 0 002-2V5a2 2 0 00-2-2zm0 13H4V5h16v11z" />
                         </svg>
                       </div>
-                      <span className="text-xs font-bold text-slate-800">At your desk</span>
+                      <span className="text-[10px] font-bold text-slate-800 sm:text-xs">At your desk</span>
                     </div>
-                    <p className="mt-1.5 text-[10px] leading-relaxed text-slate-500">
+                    <p className="mt-1 text-[8px] leading-relaxed text-slate-500 sm:mt-1.5 sm:text-[10px]">
                       Plan, analyze and manage your entire organization with clarity.
                     </p>
                   </div>
@@ -161,6 +163,7 @@ export function PlatformSplit() {
                         src="/media/features/feature-calls.png"
                         alt="Android App UI"
                         fill
+                        sizes="(max-width: 640px) 200px, 240px"
                         className="object-cover"
                       />
                     </div>
@@ -235,6 +238,7 @@ export function PlatformSplit() {
                         src="/media/features/feature-windows.png"
                         alt="Windows App UI"
                         fill
+                        sizes="(max-width: 640px) 100vw, 480px"
                         className="object-cover"
                       />
                     </div>

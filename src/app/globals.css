@@ -20,6 +20,7 @@
 }
 
 @theme inline {
+  --breakpoint-xs: 22.5rem;
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-accent: var(--accent);

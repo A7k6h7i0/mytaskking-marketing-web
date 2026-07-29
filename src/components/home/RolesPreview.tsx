@@ -242,9 +242,9 @@ export function RolesPreview() {
                 key={role.id}
                 className={`group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.01)] transition-all duration-300 hover:shadow-[0_16px_40px_rgba(15,23,42,0.04)] ${role.borderGlow}`}
               >
-                <div className="grid grid-cols-[1.2fr_0.8fr] gap-4 items-start">
+                <div className="grid grid-cols-[1fr_92px] gap-3 items-start xs:grid-cols-[1.2fr_0.8fr] xs:gap-4">
                   {/* Left Side: Text, description, highlights */}
-                  <div>
+                  <div className="min-w-0">
                     {/* Header */}
                     <div className="flex items-center gap-2.5">
                       <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${role.bgColor}`}>
@@ -324,7 +324,7 @@ export function RolesPreview() {
                         src={role.image}
                         alt={role.name}
                         fill
-                        sizes="(max-width: 768px) 30vw, 120px"
+                        sizes="(max-width: 640px) 92px, 120px"
                         className="object-cover"
                       />
                     )}

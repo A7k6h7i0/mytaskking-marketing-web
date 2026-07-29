@@ -148,9 +148,9 @@ export function ProofStrip() {
                 key={card.title}
                 className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-white/20 hover:shadow-2xl"
               >
-                <div className="grid grid-cols-[1.1fr_0.9fr] gap-4 items-start">
+                <div className="grid grid-cols-[1fr_92px] gap-3 items-start xs:grid-cols-[1.1fr_0.9fr] xs:gap-4">
                   {/* Left Side: Text, description, link */}
-                  <div>
+                  <div className="min-w-0">
                     {/* Header */}
                     <div className="flex items-center gap-2.5">
                       <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${card.bgColor} shadow-sm`}>
