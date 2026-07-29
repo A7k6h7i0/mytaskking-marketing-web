@@ -169,18 +169,20 @@ export function Hero() {
           <div className="grid items-center gap-12 py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14 lg:py-14">
             {/* Left Content */}
             <div className="relative w-full min-w-0 max-w-2xl">
-              {/* Eyebrow badge */}
+              {/* Eyebrow badge — tightened tracking + reduced text on small
+                  screens so it never wraps or overflows on narrow phones. */}
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease }}
-                className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#0075ff] shadow-[0_8px_24px_-12px_rgba(0,117,255,0.35)] ring-1 ring-[#0075ff]/15"
+                className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full bg-white px-3 py-1.5 text-[10px] font-bold uppercase leading-tight tracking-wider text-[#0075ff] shadow-[0_8px_24px_-12px_rgba(0,117,255,0.35)] ring-1 ring-[#0075ff]/15 sm:px-4 sm:text-xs"
               >
-                <span className="relative flex h-2 w-2">
+                <span className="relative flex h-2 w-2 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0075ff] opacity-70" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0075ff]" />
                 </span>
-                ONE WORKSPACE. EVERYTHING TOGETHER.
+                <span className="sm:hidden">One workspace. Everything together.</span>
+                <span className="hidden sm:inline">ONE WORKSPACE. EVERYTHING TOGETHER.</span>
               </motion.div>
 
               {/* Heading — word-by-word masked reveal */}
@@ -322,32 +324,33 @@ export function Hero() {
                 </div>
               </motion.div>
 
-              {/* Main Hero Image with organic rounded shape */}
+              {/* Main Hero Image — responsive organic rounded shape.
+                  Uses `fill` mode with an aspect-ratio wrapper so it scales
+                  cleanly from a small phone up to desktop. Corner radii are
+                  smaller on mobile so the subject isn't clipped away. */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.92, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.25, type: "spring", stiffness: 90 }}
-                className="relative mx-auto w-full max-w-md sm:max-w-lg"
+                className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-lg"
               >
                 <div className="relative">
-                  {/* Backdrop blob */}
+                  {/* Backdrop blob — mirrors the image's rounded corners */}
                   <div
                     aria-hidden
-                    className="absolute inset-0 -z-10 translate-x-6 translate-y-6 rounded-tl-[120px] rounded-br-[120px] rounded-tr-[40px] rounded-bl-[40px] bg-gradient-to-br from-[#0075ff] to-[#0056b3] opacity-90"
+                    className="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-tl-[60px] rounded-br-[60px] rounded-tr-[20px] rounded-bl-[20px] bg-gradient-to-br from-[#0075ff] to-[#0056b3] opacity-90 sm:translate-x-6 sm:translate-y-6 sm:rounded-tl-[120px] sm:rounded-br-[120px] sm:rounded-tr-[40px] sm:rounded-bl-[40px]"
                   />
-                  <div className="relative overflow-hidden rounded-tl-[120px] rounded-br-[120px] rounded-tr-[40px] rounded-bl-[40px] border-4 border-white bg-white shadow-[0_40px_80px_-24px_rgba(15,23,42,0.25)]">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-tl-[60px] rounded-br-[60px] rounded-tr-[20px] rounded-bl-[20px] border-4 border-white bg-white shadow-[0_40px_80px_-24px_rgba(15,23,42,0.25)] sm:aspect-[5/6] sm:rounded-tl-[120px] sm:rounded-br-[120px] sm:rounded-tr-[40px] sm:rounded-bl-[40px]">
                     <Image
                       src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80"
                       alt="Team collaborating in one workspace"
-                      width={1200}
-                      height={1400}
+                      fill
                       priority
-                      sizes="(max-width: 1024px) 90vw, 45vw"
-                      className="h-[440px] w-full object-cover sm:h-[520px]"
+                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 60vw, 45vw"
+                      className="object-cover object-center"
                     />
                   </div>
                 </div>
-
               </motion.div>
             </div>
           </div>
