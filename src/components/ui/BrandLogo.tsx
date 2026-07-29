@@ -11,15 +11,15 @@ type BrandLogoProps = {
 };
 
 const sizeClass = {
-  nav: "h-9 w-auto max-h-9 object-contain sm:h-10 sm:max-h-10 md:h-11 md:max-h-11",
+  nav: "h-7 w-auto max-h-7 object-contain sm:h-8 sm:max-h-8",
   md: "h-9 w-auto object-contain sm:h-10",
   lg: "h-12 w-auto object-contain sm:h-14",
 } as const;
 
 const sizePixels = {
-  nav: { width: 148, height: 44 },
-  md: { width: 160, height: 52 },
-  lg: { width: 220, height: 72 },
+  nav: { width: 110, height: 28 },
+  md: { width: 150, height: 38 },
+  lg: { width: 220, height: 56 },
 } as const;
 
 export function BrandLogo({

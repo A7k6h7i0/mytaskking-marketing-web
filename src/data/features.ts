@@ -27,7 +27,7 @@ export const featureJourneys: FeatureJourney[] = [
       "Call history with notes and call-back",
       "Emergency buzzer on calls (org custom alert sounds; org admin uploads MP3)",
       "Outgoing ring back uses org custom ringing tone when uploaded (device default otherwise)",
-    ],
+    ], 
   },
   {
     id: "calls-meetings",
