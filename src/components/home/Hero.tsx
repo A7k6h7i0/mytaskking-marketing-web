@@ -2,16 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { site } from "@/data/site";
 
-// Feature list for the bottom bar
 const bottomFeatures = [
   {
     title: "Unified Communication",
     description: "Chat, calls, meetings — all in one place.",
     icon: (
-      <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-5 w-5 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
       </svg>
     ),
@@ -21,39 +20,39 @@ const bottomFeatures = [
     title: "Complete Visibility",
     description: "Know who is working, who checked in, and what's in progress.",
     icon: (
-      <svg className="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-5 w-5 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
     ),
-    bgColor: "bg-emerald-50",
+    bgColor: "bg-blue-50",
   },
   {
     title: "Lead Tracking",
     description: "Telecallers log every lead. No more lost follow-ups.",
     icon: (
-      <svg className="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-5 w-5 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <circle cx="12" cy="12" r="9" />
         <circle cx="12" cy="12" r="5" />
         <circle cx="12" cy="12" r="1.5" />
       </svg>
     ),
-    bgColor: "bg-purple-50",
+    bgColor: "bg-blue-50",
   },
   {
     title: "Secure & Private",
     description: "Your data stays private. Only your team gets access.",
     icon: (
-      <svg className="h-5 w-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-5 w-5 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
       </svg>
     ),
-    bgColor: "bg-amber-50",
+    bgColor: "bg-blue-50",
   },
   {
     title: "Smarter Decisions",
     description: "Real-time insights to help you lead better.",
     icon: (
-      <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-5 w-5 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
       </svg>
     ),
@@ -61,156 +60,316 @@ const bottomFeatures = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const wordContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const wordItem: Variants = {
+  hidden: { y: "110%" },
+  visible: {
+    y: "0%",
+    transition: { duration: 0.85, ease },
+  },
+};
+
+const paraContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.9,
+    },
+  },
+};
+
+const paraWord: Variants = {
+  hidden: { y: "110%", opacity: 0 },
+  visible: {
+    y: "0%",
+    opacity: 1,
+    transition: { duration: 0.6, ease },
+  },
+};
+
+// Renders text as words, each wrapped in an overflow-hidden mask
+// so the word slides up from below on load (Solvior-style reveal).
+function MaskedWords({
+  text,
+  className = "",
+  wordClassName = "",
+  variants = wordItem,
+}: {
+  text: string;
+  className?: string;
+  wordClassName?: string;
+  variants?: Variants;
+}) {
+  return (
+    <>
+      {text.split(" ").map((word, i) => (
+        <span
+          key={`${word}-${i}`}
+          className={`inline-flex overflow-hidden align-bottom ${className}`}
+        >
+          <motion.span variants={variants} className={`inline-block ${wordClassName}`}>
+            {word}
+            {i < text.split(" ").length - 1 ? "\u00A0" : ""}
+          </motion.span>
+        </span>
+      ))}
+    </>
+  );
+}
+
 export function Hero() {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#f3f8fc] via-[#e8f3fa] to-[#ffffff] pb-12 pt-20 sm:pb-16 md:pb-20 lg:pt-24">
+    <section className="relative w-full overflow-hidden bg-[#f5f8fc] pb-16 pt-20 sm:pb-20 md:pb-24 lg:pt-24">
       {/* Concentric Orbit Lines Background */}
-      <div className="absolute right-[-10%] top-[10%] -z-10 hidden h-[800px] w-[800px] items-center justify-center lg:flex">
-        <div className="absolute h-[350px] w-[350px] rounded-full border border-slate-200/40" />
-        <div className="absolute h-[550px] w-[550px] rounded-full border border-slate-200/30" />
-        <div className="absolute h-[750px] w-[750px] rounded-full border border-slate-200/20" />
-        <div className="absolute h-[950px] w-[950px] rounded-full border border-slate-200/10" />
-      </div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.4, ease }}
+        className="pointer-events-none absolute right-[-15%] top-[-5%] -z-10 hidden h-[900px] w-[900px] items-center justify-center lg:flex"
+      >
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
+          className="absolute h-[350px] w-[350px] rounded-full border border-dashed border-[#0075ff]/25"
+        />
+        <div className="absolute h-[550px] w-[550px] rounded-full border border-[#0075ff]/15" />
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ repeat: Infinity, duration: 90, ease: "linear" }}
+          className="absolute h-[750px] w-[750px] rounded-full border border-dashed border-[#0075ff]/15"
+        />
+        <div className="absolute h-[950px] w-[950px] rounded-full border border-[#0075ff]/10" />
+      </motion.div>
+
+      {/* Soft Gradient Blobs */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-24 -z-10 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(0,117,255,0.18),transparent_65%)] blur-2xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] rounded-full bg-[radial-gradient(circle_at_center,rgba(0,86,179,0.14),transparent_65%)] blur-2xl"
+      />
 
       <div className="section-pad relative w-full">
         <div className="container-site">
           {/* Main Hero Grid */}
-          <div className="grid items-center gap-12 py-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 lg:py-16">
+          <div className="grid items-center gap-12 py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14 lg:py-14">
             {/* Left Content */}
-            <div className="w-full max-w-2xl min-w-0">
+            <div className="relative w-full min-w-0 max-w-2xl">
+              {/* Eyebrow badge */}
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45 }}
-                className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 ring-1 ring-blue-100"
+                transition={{ duration: 0.7, ease }}
+                className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#0075ff] shadow-[0_8px_24px_-12px_rgba(0,117,255,0.35)] ring-1 ring-[#0075ff]/15"
               >
-                <span className="h-2 w-2 rounded-full bg-blue-600" />
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0075ff] opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0075ff]" />
+                </span>
                 ONE WORKSPACE. EVERYTHING TOGETHER.
               </motion.div>
 
+              {/* Heading — word-by-word masked reveal */}
               <motion.h1
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.08 }}
-                className="font-display text-4xl font-extrabold leading-[1.1] text-slate-900 sm:text-5xl md:text-6xl"
+                initial="hidden"
+                animate="visible"
+                variants={wordContainer}
+                className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-[4rem]"
               >
-                Run your company in <span className="bg-gradient-to-r from-[#1f5eff] to-[#00a9c8] bg-clip-text text-transparent">one workspace</span> — not scattered chats.
+                <MaskedWords text="Run your company in" />
+                <span className="relative inline-flex overflow-hidden align-bottom">
+                  <motion.span variants={wordItem} className="relative inline-block text-[#0075ff]">
+                    one&nbsp;workspace
+                  </motion.span>
+                </span>
+                <MaskedWords text=" — not scattered chats." />
               </motion.h1>
 
-              {/* Small horizontal gradient line */}
+              {/* Underline divider */}
               <motion.div
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={{ opacity: 1, scaleX: 1 }}
-                transition={{ duration: 0.5, delay: 0.12 }}
-                className="mt-5 h-1.5 w-24 origin-left rounded-full bg-gradient-to-r from-[#1f5eff] to-[#8fd400]"
+                transition={{ duration: 0.7, delay: 1.0, ease }}
+                className="mt-6 h-1.5 w-24 origin-left rounded-full bg-gradient-to-r from-[#0075ff] to-[#0056b3]"
               />
 
+              {/* Paragraph — word stagger */}
               <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.16 }}
+                initial="hidden"
+                animate="visible"
+                variants={paraContainer}
                 className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg"
               >
-                Teams chat, call, meet and manage tasks together. Telecallers log every lead.
-                Managers see who checked in — and who is actually working.
+                <MaskedWords
+                  text="Teams chat, call, meet and manage tasks together. Telecallers log every lead. Managers see who checked in — and who is actually working."
+                  variants={paraWord}
+                />
               </motion.p>
 
+              {/* CTAs */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.24 }}
+                transition={{ duration: 0.8, delay: 1.2, ease }}
                 className="btn-row-mobile mt-8 flex flex-wrap items-center gap-4 sm:mt-10"
               >
                 <Link
                   href={site.urls.demo}
-                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#1f5eff] via-[#00a9c8] to-[#8fd400] px-6 py-3.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(31,94,255,0.25)] transition hover:opacity-95 hover:scale-[1.01]"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-[#0075ff] px-6 py-3.5 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(0,117,255,0.55)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_32px_-10px_rgba(0,117,255,0.65)]"
                 >
-                  Request a demo →
+                  <span className="relative z-10 flex items-center gap-2">
+                    Request a demo
+                    <svg
+                      className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-[#0056b3] to-[#0075ff] transition-transform duration-500 group-hover:translate-x-0" />
                 </Link>
                 <Link
                   href="/features"
-                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:scale-[1.01]"
+                  className="group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0075ff]/40 hover:bg-white hover:text-[#0075ff] hover:shadow-md"
                 >
                   Explore features
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 transition group-hover:bg-[#0075ff]/10">
+                    <svg
+                      className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={3}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
                 </Link>
+              </motion.div>
+
+              {/* Scroll Indicator */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.9, delay: 1.5, ease }}
+                className="mt-12 hidden items-center gap-4 lg:flex"
+              >
+                <motion.div
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                  className="flex h-10 w-6 justify-center rounded-full border-2 border-slate-300 pt-2"
+                >
+                  <motion.span
+                    animate={{ y: [0, 8, 0], opacity: [1, 0.2, 1] }}
+                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                    className="h-2 w-1 rounded-full bg-[#0075ff]"
+                  />
+                </motion.div>
+                <span className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
+                  Scroll to explore
+                </span>
               </motion.div>
             </div>
 
-            {/* Right Showcase Image with Floating Icons */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.18 }}
-              className="relative w-full min-w-0"
-            >
-              {/* Floating Checkmark Icon (Purple) */}
+            {/* Right Showcase — main image + rotating badge only */}
+            <div className="relative w-full min-w-0">
+              {/* Rotating Circular Text Badge */}
               <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute left-[5%] top-[15%] z-10 flex h-10 w-10 items-center justify-center rounded-full border border-purple-200 bg-purple-50 text-purple-500 shadow-md sm:h-12 sm:w-12"
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.9, type: "spring", stiffness: 120 }}
+                className="absolute -left-6 top-[38%] z-30 hidden h-28 w-28 sm:flex sm:h-32 sm:w-32"
               >
-                <svg className="h-5 w-5 text-purple-500 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
+                <motion.svg
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 22, ease: "linear" }}
+                  viewBox="0 0 200 200"
+                  className="h-full w-full"
+                >
+                  <defs>
+                    <path
+                      id="circle-text-path"
+                      d="M 100, 100 m -78, 0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"
+                    />
+                  </defs>
+                  <text fontSize="16" fontWeight="700" letterSpacing="4" fill="#051229">
+                    <textPath href="#circle-text-path" startOffset="0">
+                      MYTASKKING • WORK BETTER • TOGETHER •
+                    </textPath>
+                  </text>
+                </motion.svg>
+                <div className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#0075ff] text-white shadow-[0_10px_20px_-6px_rgba(0,117,255,0.55)]">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
               </motion.div>
 
-              {/* Floating People Icon (Green) */}
+              {/* Main Hero Image with organic rounded shape */}
               <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-                className="absolute right-[10%] top-[-5%] z-10 flex h-12 w-12 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-500 shadow-md sm:h-14 sm:w-14"
+                initial={{ opacity: 0, scale: 0.92, y: 30 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.25, type: "spring", stiffness: 90 }}
+                className="relative mx-auto w-full max-w-md sm:max-w-lg"
               >
-                <svg className="h-6 w-6 text-emerald-500 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </motion.div>
+                <div className="relative">
+                  {/* Backdrop blob */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 -z-10 translate-x-6 translate-y-6 rounded-tl-[120px] rounded-br-[120px] rounded-tr-[40px] rounded-bl-[40px] bg-gradient-to-br from-[#0075ff] to-[#0056b3] opacity-90"
+                  />
+                  <div className="relative overflow-hidden rounded-tl-[120px] rounded-br-[120px] rounded-tr-[40px] rounded-bl-[40px] border-4 border-white bg-white shadow-[0_40px_80px_-24px_rgba(15,23,42,0.25)]">
+                    <Image
+                      src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80"
+                      alt="Team collaborating in one workspace"
+                      width={1200}
+                      height={1400}
+                      priority
+                      sizes="(max-width: 1024px) 90vw, 45vw"
+                      className="h-[440px] w-full object-cover sm:h-[520px]"
+                    />
+                  </div>
+                </div>
 
-              {/* Floating Chat Icon (Blue) */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ repeat: Infinity, duration: 3.8, ease: "easeInOut" }}
-                className="absolute -right-2 top-[40%] z-10 flex h-12 w-12 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-blue-500 shadow-md sm:h-14 sm:w-14"
-              >
-                <svg className="h-6 w-6 text-blue-500 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
               </motion.div>
-
-              {/* Floating Stats Icon (Orange) */}
-              <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ repeat: Infinity, duration: 4.2, ease: "easeInOut" }}
-                className="absolute -right-4 bottom-[15%] z-10 flex h-12 w-12 items-center justify-center rounded-full border border-orange-200 bg-orange-50 text-orange-500 shadow-md sm:h-14 sm:w-14"
-              >
-                <svg className="h-6 w-6 text-orange-500 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-              </motion.div>
-
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200/60 bg-white p-2.5 shadow-[0_32px_64px_-16px_rgba(15,23,42,0.1)] sm:p-3">
-                <Image
-                  src="/media/hero-devices.png"
-                  alt="MyTaskKing on phone and laptop"
-                  width={1280}
-                  height={720}
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="h-auto w-full rounded-xl object-cover"
-                />
-              </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Bottom Features Bar */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.32 }}
-            className="mt-12 rounded-3xl border border-slate-100 bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.04)] sm:mt-16 sm:p-8"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.2, ease }}
+            className="mt-16 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] border border-slate-100 bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.06)] sm:mt-20 sm:p-8"
           >
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
               {bottomFeatures.map((feat, index) => (
-                <div key={feat.title} className="flex flex-col items-start min-w-0">
+                <motion.div
+                  key={feat.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.08 * index, ease }}
+                  className="flex min-w-0 flex-col items-start"
+                >
                   <div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-xl ${feat.bgColor} shadow-sm`}>
                     {feat.icon}
                   </div>
@@ -220,7 +379,7 @@ export function Hero() {
                   <p className="mt-2 text-xs leading-relaxed text-slate-500 sm:text-sm">
                     {feat.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>

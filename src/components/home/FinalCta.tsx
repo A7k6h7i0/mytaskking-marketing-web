@@ -1,9 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export function FinalCta() {
   return (
-    <section id="contact" className="w-full scroll-mt-[calc(var(--header-height)+1rem)]">
-      <div className="brand-gradient-bg relative w-full overflow-hidden py-12 text-white sm:py-20 md:py-24">
+    <section id="contact" className="w-full scroll-mt-[calc(var(--header-height)+1rem)] p-4 sm:p-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-[#0075ff] relative w-full overflow-hidden rounded-tl-[60px] rounded-br-[60px] rounded-tr-[20px] rounded-bl-[20px] py-12 text-white sm:py-20 md:py-24 shadow-2xl"
+      >
         <div
           className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 rounded-full bg-white/20 blur-3xl"
           aria-hidden
@@ -29,7 +38,7 @@ export function FinalCta() {
             <div className="btn-row-mobile flex flex-col gap-3 sm:flex-row lg:flex-col">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-bold text-white transition hover:bg-ink-soft"
+                className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#0075ff] transition hover:bg-slate-50"
               >
                 Talk to sales
               </Link>
@@ -42,7 +51,7 @@ export function FinalCta() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,15 +1,22 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 
-// 4 small features in a row
+/* ---------------------------- 4 small features ---------------------------- */
 const subFeatures = [
   {
     title: "Secure & Reliable",
     icon: (
-      <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-4 w-4 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
@@ -17,7 +24,7 @@ const subFeatures = [
   {
     title: "Role-based Access",
     icon: (
-      <svg className="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-4 w-4 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
     ),
@@ -25,7 +32,7 @@ const subFeatures = [
   {
     title: "Anywhere Access",
     icon: (
-      <svg className="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-4 w-4 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
       </svg>
     ),
@@ -33,14 +40,14 @@ const subFeatures = [
   {
     title: "Real-time Insights",
     icon: (
-      <svg className="h-5 w-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-4 w-4 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
       </svg>
     ),
   },
 ];
 
-// 6 Role Cards
+/* -------------------------------- 6 role cards ----------------------------- */
 const roleCards = [
   {
     id: "employee",
@@ -51,19 +58,12 @@ const roleCards = [
       "Team chat & announcements",
       "Daily check-ins & calendar",
     ],
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
     icon: (
-      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
     ),
-    floatingIcon: (
-      <svg className="h-3 w-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-      </svg>
-    ),
-    bgColor: "bg-blue-50 text-blue-600",
-    borderGlow: "group-hover:border-blue-200",
   },
   {
     id: "manager",
@@ -74,19 +74,12 @@ const roleCards = [
       "Task delegation & tracking",
       "Reports & performance insights",
     ],
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80",
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80",
     icon: (
-      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
     ),
-    floatingIcon: (
-      <svg className="h-3 w-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
-      </svg>
-    ),
-    bgColor: "bg-emerald-50 text-emerald-600",
-    borderGlow: "group-hover:border-emerald-200",
   },
   {
     id: "telecaller",
@@ -97,19 +90,12 @@ const roleCards = [
       "One-tap calls & notes",
       "Call recordings & outcomes",
     ],
-    image: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=300&q=80",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80",
     icon: (
-      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 011.94.864l-.5 2.5a1 1 0 01-1.25.75L6.56 5.624a15.075 15.075 0 006.816 6.816l.864-1.25a1 1 0 011.25-.75l2.5.5a1 1 0 01.864 1.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
       </svg>
     ),
-    floatingIcon: (
-      <svg className="h-3 w-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 011.94.864l-.5 2.5a1 1 0 01-1.25.75L6.56 5.624a15.075 15.075 0 006.816 6.816l.864-1.25a1 1 0 011.25-.75l2.5.5a1 1 0 01.864 1.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-      </svg>
-    ),
-    bgColor: "bg-purple-50 text-purple-600",
-    borderGlow: "group-hover:border-purple-200",
   },
   {
     id: "client",
@@ -120,19 +106,12 @@ const roleCards = [
       "Share files & feedback",
       "Stay informed, always",
     ],
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
     icon: (
-      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
-    floatingIcon: (
-      <svg className="h-3 w-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-      </svg>
-    ),
-    bgColor: "bg-blue-50 text-blue-600",
-    borderGlow: "group-hover:border-blue-200",
   },
   {
     id: "org-admin",
@@ -143,19 +122,12 @@ const roleCards = [
       "Activity logs & recordings",
       "Workspace & security settings",
     ],
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
     icon: (
-      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
       </svg>
     ),
-    floatingIcon: (
-      <svg className="h-3 w-3 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-      </svg>
-    ),
-    bgColor: "bg-amber-50 text-amber-600",
-    borderGlow: "group-hover:border-amber-200",
   },
   {
     id: "super-admin",
@@ -166,191 +138,296 @@ const roleCards = [
       "Branding & customisation",
       "Approve & audit everything",
     ],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=300&q=80",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
     icon: (
-      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
       </svg>
     ),
-    floatingIcon: (
-      <svg className="h-3 w-3 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-      </svg>
-    ),
-    bgColor: "bg-rose-50 text-rose-600",
-    borderGlow: "group-hover:border-rose-200",
   },
 ];
 
-export function RolesPreview() {
+const TOTAL = roleCards.length;
+
+function RoleSlide({
+  role,
+  index,
+  isActive,
+  scrollYProgress,
+}: {
+  role: (typeof roleCards)[number];
+  index: number;
+  isActive: boolean;
+  scrollYProgress: MotionValue<number>;
+}) {
+  // Cinematic depth stack: cards sit "behind" the active one with progressive
+  // 3D depth (scaled down, tilted back, faded), then rise forward into place,
+  // stay at rest, and finally tilt forward + lift away as the next card takes
+  // over. Multiple cards are visible at once, giving a physical-deck feel.
+  const step = 1 / TOTAL;
+  const start = index * step;
+  const end = (index + 1) * step;
+
+  const isFirst = index === 0;
+  const isLast = index === TOTAL - 1;
+
+  // Seven key progress checkpoints around this card's active window
+  const p0 = start - 2 * step;   // deep in the back of the stack
+  const p1 = start - step;       // one slot behind the active card
+  const p2 = start - 0.3 * step; // rising toward the front
+  const p3 = start;              // arrives — active begins
+  const p4 = end;                // active ends
+  const p5 = end + 0.3 * step;   // tilting forward, starting to leave
+  const p6 = end + 0.6 * step;   // fully gone
+
+  type Keyframe = {
+    p: number;
+    y: string;
+    scale: number;
+    rotX: string;
+    opacity: number;
+  };
+
+  let keyframes: Keyframe[];
+
+  if (isFirst) {
+    // No enter phase — starts at active
+    keyframes = [
+      { p: p3, y: "0px", scale: 1, rotX: "0deg", opacity: 1 },
+      { p: p4, y: "0px", scale: 1, rotX: "0deg", opacity: 1 },
+      { p: p5, y: "-40px", scale: 1.04, rotX: "-12deg", opacity: 0.5 },
+      { p: p6, y: "-90px", scale: 1.1, rotX: "-22deg", opacity: 0 },
+    ];
+  } else if (isLast) {
+    // No leave phase — stays active till end
+    keyframes = [
+      { p: p0, y: "70px", scale: 0.78, rotX: "16deg", opacity: 0 },
+      { p: p1, y: "34px", scale: 0.88, rotX: "9deg", opacity: 0.4 },
+      { p: p2, y: "10px", scale: 0.96, rotX: "3deg", opacity: 0.85 },
+      { p: p3, y: "0px", scale: 1, rotX: "0deg", opacity: 1 },
+      { p: p4, y: "0px", scale: 1, rotX: "0deg", opacity: 1 },
+    ];
+  } else {
+    keyframes = [
+      { p: p0, y: "70px", scale: 0.78, rotX: "16deg", opacity: 0 },
+      { p: p1, y: "34px", scale: 0.88, rotX: "9deg", opacity: 0.4 },
+      { p: p2, y: "10px", scale: 0.96, rotX: "3deg", opacity: 0.85 },
+      { p: p3, y: "0px", scale: 1, rotX: "0deg", opacity: 1 },
+      { p: p4, y: "0px", scale: 1, rotX: "0deg", opacity: 1 },
+      { p: p5, y: "-40px", scale: 1.04, rotX: "-12deg", opacity: 0.5 },
+      { p: p6, y: "-90px", scale: 1.1, rotX: "-22deg", opacity: 0 },
+    ];
+  }
+
+  // Web Animations API (used internally by Framer Motion) rejects keyframe
+  // offsets outside [0, 1]. Keep only points inside this range — useTransform
+  // will clamp to the first/last output for progress values beyond them.
+  const inRange = keyframes.filter((kf) => kf.p >= 0 && kf.p <= 1);
+  const safeKeyframes = inRange.length >= 2 ? inRange : keyframes;
+
+  const inputRange = safeKeyframes.map((kf) => kf.p);
+  const yOutput = safeKeyframes.map((kf) => kf.y);
+  const scaleOutput = safeKeyframes.map((kf) => kf.scale);
+  const rotateXOutput = safeKeyframes.map((kf) => kf.rotX);
+  const opacityOutput = safeKeyframes.map((kf) => kf.opacity);
+
+  const y = useTransform(scrollYProgress, inputRange, yOutput);
+  const scale = useTransform(scrollYProgress, inputRange, scaleOutput);
+  const rotateX = useTransform(scrollYProgress, inputRange, rotateXOutput);
+  const opacity = useTransform(scrollYProgress, inputRange, opacityOutput);
+
   return (
-    <section id="roles" className="w-full scroll-mt-[calc(var(--header-height)+1rem)] bg-slate-50/20 py-16 sm:py-20 md:py-24 border-b border-slate-100">
-      <div className="section-pad">
-        <div className="container-site">
-          {/* Top Split Section: Left Content, Right Mockup */}
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:items-center">
-            {/* Left Column: Text & 4 Small Features */}
-            <div className="w-full">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-600">
-                <span className="h-0.5 w-6 bg-blue-600" />
-                ROLES
-              </div>
-              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.15] text-slate-900 sm:text-4xl md:text-5xl">
-                Built for how your company <span className="text-blue-600">actually works</span>.
-              </h2>
-              <p className="mt-5 text-sm leading-relaxed text-slate-600 sm:text-base">
-                Every team has a different role to play. MyTaskKing brings everyone together in one workspace — aligned, informed, and in control.
-              </p>
-
-              {/* 4 Small Features Row below description */}
-              <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                {subFeatures.map((feat) => (
-                  <div key={feat.title} className="flex flex-col items-center justify-center rounded-xl border border-slate-200/60 bg-white p-3 shadow-[0_2px_10px_rgba(0,0,0,0.01)] text-center">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-700 mb-2">
-                      {feat.icon}
-                    </div>
-                    <span className="font-display text-[10px] font-bold text-slate-800 leading-tight">
-                      {feat.title}
-                    </span>
-                  </div>
-                ))}
-              </div>
+    <motion.div
+      style={{
+        y,
+        scale,
+        rotateX,
+        opacity,
+        pointerEvents: isActive ? "auto" : "none",
+        // Later cards paint UNDER earlier ones, so the active card is always
+        // on top of the queued stack peeking from behind.
+        zIndex: TOTAL - index,
+        transformOrigin: "center bottom",
+      }}
+      aria-hidden={!isActive}
+      className="absolute inset-0 flex items-center justify-center px-4 sm:px-8"
+    >
+      <div
+        className={`grid w-full max-w-5xl grid-cols-1 items-center gap-8 rounded-[2rem] border bg-white p-6 transition-shadow duration-500 sm:p-8 md:grid-cols-[1.05fr_0.95fr] md:gap-10 md:p-10 ${
+          isActive
+            ? "border-slate-200/80 shadow-[0_40px_80px_-30px_rgba(15,23,42,0.4)]"
+            : "border-slate-200/60 shadow-[0_20px_40px_-30px_rgba(15,23,42,0.25)]"
+        }`}
+      >
+        {/* Text side */}
+        <div className="order-2 md:order-1">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0075ff] text-white shadow-[0_12px_24px_-8px_rgba(0,117,255,0.6)]">
+              {role.icon}
             </div>
-
-            {/* Right Column: Beautiful Laptop + Phone + Plant Composition */}
-            <div className="relative flex w-full items-center justify-center pt-6">
-              {/* Soft background glow */}
-              <div className="pointer-events-none absolute -inset-10 rounded-full bg-blue-500/5 blur-3xl" />
-              
-              {/* Central Laptop Mockup */}
-              <div className="relative w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-1 shadow-[0_24px_50px_rgba(15,23,42,0.06)]">
-                <Image
-                  src="/media/roles-devices.png"
-                  alt="MyTaskKing Laptop Dashboard"
-                  width={1280}
-                  height={600}
-                  className="h-auto w-full rounded-lg object-contain"
-                />
-              </div>
-            </div>
+            <span className="font-display text-3xl font-black text-slate-100 sm:text-4xl">
+              {String(index + 1).padStart(2, "0")}
+            </span>
           </div>
 
-          {/* 6 Role Cards Grid */}
-          <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {roleCards.map((role) => (
-              <div
-                key={role.id}
-                className={`group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.01)] transition-all duration-300 hover:shadow-[0_16px_40px_rgba(15,23,42,0.04)] ${role.borderGlow}`}
-              >
-                <div className="grid grid-cols-[1fr_92px] gap-3 items-start xs:grid-cols-[1.2fr_0.8fr] xs:gap-4">
-                  {/* Left Side: Text, description, highlights */}
-                  <div className="min-w-0">
-                    {/* Header */}
-                    <div className="flex items-center gap-2.5">
-                      <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${role.bgColor}`}>
-                        {role.icon}
-                      </div>
-                      <h3 className="font-display text-sm font-extrabold text-slate-900 sm:text-base">
-                        {role.name}
-                      </h3>
-                    </div>
+          <h3 className="mt-5 font-display text-2xl font-extrabold text-slate-900 sm:text-3xl md:text-4xl">
+            {role.name}
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+            {role.description}
+          </p>
 
-                    {/* Description */}
-                    <p className="mt-3 text-xs leading-relaxed text-slate-500">
-                      {role.description}
-                    </p>
-
-                    {/* Bullet Highlights */}
-                    <ul className="mt-4 space-y-2">
-                      {role.highlights.map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-[10px] text-slate-700 font-semibold leading-tight">
-                          <svg className="h-3.5 w-3.5 shrink-0 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Right Side: Portrait Image or UI Graphic */}
-                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm">
-                    {role.id === "org-admin" ? (
-                      /* Org Admin UI Graphic */
-                      <div className="relative flex h-full w-full flex-col justify-between bg-slate-50 p-2.5">
-                        <div className="space-y-1.5">
-                          <div className="h-1.5 w-10 rounded-full bg-slate-200" />
-                          <div className="flex items-center gap-1.5 rounded bg-white p-1 shadow-sm">
-                            <div className="h-4 w-4 rounded-full bg-slate-100" />
-                            <div className="h-1 w-8 rounded-full bg-slate-200" />
-                          </div>
-                          <div className="flex items-center gap-1.5 rounded bg-white p-1 shadow-sm">
-                            <div className="h-4 w-4 rounded-full bg-slate-100" />
-                            <div className="h-1 w-6 rounded-full bg-slate-200" />
-                          </div>
-                        </div>
-                        {/* Lock Shield Overlay */}
-                        <div className="absolute inset-x-0 bottom-0 flex h-1/2 items-center justify-center bg-gradient-to-t from-slate-900/80 to-slate-900/40 text-white">
-                          <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                          </svg>
-                        </div>
-                      </div>
-                    ) : role.id === "super-admin" ? (
-                      /* Platform Super Admin UI Graphic */
-                      <div className="flex h-full w-full flex-col justify-between bg-white p-2.5">
-                        <div className="space-y-1">
-                          <span className="text-[8px] font-bold text-slate-400">Total Orgs</span>
-                          <p className="text-xs font-black text-slate-900">128</p>
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[8px] font-bold text-slate-400">Active Users</span>
-                          <p className="text-xs font-black text-slate-900">5,230</p>
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[8px] font-bold text-slate-400">Revenue</span>
-                          <p className="text-xs font-black text-rose-500">$48,820</p>
-                        </div>
-                        {/* Mini Pink Line Chart */}
-                        <div className="h-6 w-full">
-                          <svg className="h-full w-full text-rose-500" viewBox="0 0 100 30" fill="none">
-                            <path d="M0,25 Q20,5 40,18 T80,8 T100,2" stroke="currentColor" strokeWidth={2} strokeLinecap="round" fill="none" />
-                          </svg>
-                        </div>
-                      </div>
-                    ) : (
-                      /* Standard Portrait Image */
-                      <Image
-                        src={role.image}
-                        alt={role.name}
-                        fill
-                        sizes="(max-width: 640px) 92px, 120px"
-                        className="object-cover"
-                      />
-                    )}
-
-                    {/* Floating Mini Icon on top-right of the visual */}
-                    <div className={`absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full border border-white shadow-sm ${role.bgColor}`}>
-                      {role.floatingIcon}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Explore Link */}
-                <div className="mt-5 border-t border-slate-100 pt-3">
-                  <Link
-                    href={`/roles#${role.id}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 transition hover:text-blue-700"
-                  >
-                    Explore role
-                    <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
+          <ul className="mt-6 space-y-3">
+            {role.highlights.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm font-semibold text-slate-700">
+                <svg className="mt-0.5 h-5 w-5 shrink-0 text-[#0075ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{item}</span>
+              </li>
             ))}
+          </ul>
+
+          <div className="mt-7">
+            <Link
+              href={`/roles#${role.id}`}
+              className="group inline-flex items-center gap-2 rounded-full bg-[#051229] px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#0075ff]"
+            >
+              Explore role
+              <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
+        </div>
+
+        {/* Image side */}
+        <div className="order-1 md:order-2">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] shadow-[0_20px_50px_-20px_rgba(15,23,42,0.35)] sm:aspect-[5/4]">
+            <Image
+              src={role.image}
+              alt={role.name}
+              fill
+              sizes="(max-width: 768px) 90vw, 45vw"
+              className="object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export function RolesPreview() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const idx = Math.min(TOTAL - 1, Math.max(0, Math.floor(v * TOTAL)));
+    setActiveIndex(idx);
+  });
+
+  return (
+    <section
+      ref={sectionRef}
+      id="roles"
+      className="relative z-[100] isolate w-full scroll-mt-[calc(var(--header-height)+1rem)]"
+      style={{ height: `${TOTAL * 100}vh` }}
+    >
+      {/* Pinned, fully opaque viewport — nothing behind shows through while active */}
+      <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden border-b border-slate-100 bg-slate-50">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-40 top-24 -z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(0,117,255,0.1),transparent_65%)] blur-2xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-32 bottom-10 -z-0 h-[380px] w-[380px] rounded-full bg-[radial-gradient(circle_at_center,rgba(0,86,179,0.08),transparent_65%)] blur-2xl"
+        />
+
+        {/* Header row — static, no entrance animation (only the cards animate) */}
+        <div className="section-pad relative shrink-0 pt-8 sm:pt-10">
+          <div className="container-site">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-[#0075ff]">
+                  <span className="h-px w-8 bg-[#0075ff]" />
+                  Roles
+                </div>
+
+                <h2 className="mt-4 font-display text-2xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
+                  Built for how your company{" "}
+                  <span className="text-[#0075ff]">actually works.</span>
+                </h2>
+
+                <div className="mt-4 hidden flex-wrap gap-2.5 lg:flex">
+                  {subFeatures.map((feat) => (
+                    <div
+                      key={feat.title}
+                      className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-bold text-slate-700 shadow-sm"
+                    >
+                      {feat.icon}
+                      {feat.title}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Live counter + progress bar (scroll-driven, functional not decorative) */}
+              <div className="flex items-center gap-4 self-start lg:self-auto">
+                <span className="font-display text-sm font-bold text-slate-400">
+                  <span className="text-slate-900">
+                    {String(activeIndex + 1).padStart(2, "0")}
+                  </span>
+                  {" / "}
+                  {String(TOTAL).padStart(2, "0")}
+                </span>
+                <div className="h-1 w-24 overflow-hidden rounded-full bg-slate-200 sm:w-32">
+                  <motion.div
+                    className="h-full origin-left rounded-full bg-[#0075ff]"
+                    style={{ scaleX: scrollYProgress }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Vertical card stack — one role replaces the next as you scroll.
+            `perspective` on the parent turns each card's rotateX into a real
+            3D tilt (backward peek / forward flip-away) instead of a flat
+            squish. */}
+        <div
+          className="relative min-h-0 flex-1"
+          style={{ perspective: "1400px" }}
+        >
+          {roleCards.map((role, index) => (
+            <RoleSlide
+              key={role.id}
+              role={role}
+              index={index}
+              isActive={index === activeIndex}
+              scrollYProgress={scrollYProgress}
+            />
+          ))}
+        </div>
+
+        {/* Dot indicators */}
+        <div className="relative z-10 flex shrink-0 items-center justify-center gap-2 pb-6">
+          {roleCards.map((role, index) => (
+            <span
+              key={role.id}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                index === activeIndex ? "w-6 bg-[#0075ff]" : "w-1.5 bg-slate-300"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

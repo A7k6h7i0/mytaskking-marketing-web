@@ -4,13 +4,13 @@ import { site } from "@/data/site";
 
 export function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden bg-ink text-paper">
+    <footer className="relative w-full overflow-hidden bg-[#051229] text-paper">
       <div
-        className="pointer-events-none absolute -left-20 top-0 h-64 w-64 rounded-full bg-accent/25 blur-3xl"
+        className="pointer-events-none absolute -left-20 top-0 h-64 w-64 rounded-full bg-[#0075ff]/25 blur-3xl"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-16 bottom-0 h-56 w-56 rounded-full bg-lime/20 blur-3xl"
+        className="pointer-events-none absolute -right-16 bottom-0 h-56 w-56 rounded-full bg-[#0075ff]/20 blur-3xl"
         aria-hidden
       />
 
@@ -59,7 +59,7 @@ export function Footer() {
             <p className="mt-4 text-sm leading-relaxed text-white/70">
               Ready to replace scattered chats and missed follow-ups?
             </p>
-            <Link href="/contact" className="btn-accent mt-5">
+            <Link href="/contact" className="inline-flex items-center justify-center rounded-xl bg-[#0075ff] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-blue-600 mt-5">
               Talk to sales
             </Link>
           </div>

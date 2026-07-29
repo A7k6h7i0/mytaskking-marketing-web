@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { site } from "@/data/site";
 
@@ -35,7 +36,12 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md">
+    <motion.header 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, type: "spring" }}
+      className="fixed inset-x-0 top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md"
+    >
       <div className="section-pad">
         <div className="container-site flex h-16 items-center justify-between gap-3">
           <BrandLogo priority size="nav" className="scale-95 sm:scale-100 origin-left" />
@@ -62,7 +68,7 @@ export function Header() {
           <div className="hidden xl:block">
             <Link
               href={site.urls.demo}
-              className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-[#1f5eff] via-[#00a9c8] to-[#8fd400] px-4 py-2 text-xs font-bold text-white shadow-sm transition hover:opacity-95 hover:scale-[1.01]"
+              className="inline-flex items-center justify-center rounded-lg bg-[#0075ff] px-4 py-2 text-xs font-bold text-white shadow-sm transition hover:opacity-95 hover:scale-[1.01]"
             >
               Request demo
             </Link>
@@ -114,7 +120,7 @@ export function Header() {
               })}
               <Link
                 href={site.urls.demo}
-                className="mt-3 inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-[#1f5eff] via-[#00a9c8] to-[#8fd400] py-2.5 text-sm font-bold text-white shadow-sm transition hover:opacity-95"
+                className="mt-3 inline-flex items-center justify-center rounded-lg bg-[#0075ff] py-2.5 text-sm font-bold text-white shadow-sm transition hover:opacity-95"
                 onClick={() => setOpen(false)}
               >
                 Request demo
@@ -123,6 +129,6 @@ export function Header() {
           </nav>
         </div>
       ) : null}
-    </header>
+    </motion.header>
   );
 }
